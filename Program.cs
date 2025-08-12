@@ -139,7 +139,7 @@ public class Program
 
 
                     Console.WriteLine($"Đã thêm {quantity} {name} vào giỏ hàng");
-                    Console.WriteLine($"Số lượng còn lại là {products[i].quantity - quantity}");
+                    //Console.WriteLine($"Số lượng còn lại là {products[i].quantity - quantity}");
                 }
                 else
                 {
@@ -148,6 +148,10 @@ public class Program
                 break;
             }
         }
+    }
+
+    public static void PrintCarts()
+    {
         Console.WriteLine("Giỏ hàng hiện tại:");
         foreach (Product p in carts)
         {
@@ -174,15 +178,15 @@ public class Program
                 }
             }
         }
-        Console.WriteLine($"Tổng giá trị đơn hàng là: {res}");
-        Console.WriteLine("Số lượng hàng trong kho sau khi thanh toán:");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Tổng giá trị đơn hàng là: {res} VND");
+        Console.ResetColor();
+        Console.WriteLine("\nSố lượng hàng trong kho sau khi thanh toán:");
         foreach (Product p in products)
         {
             Console.WriteLine(ToString(p));
         }
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Cảm ơn bạn đã mua hàng!");
-        Console.ResetColor();
+       
 
     }
 
@@ -244,7 +248,10 @@ public class Program
         decimal discountAmount = totalPrice * totalDiscount / 100;
         decimal finalPrice = totalPrice - discountAmount;
         Console.WriteLine($"Giảm giá {totalDiscount}%: {discountAmount} VND");
-        Console.WriteLine($"Tổng thanh toán sau giảm giá: {finalPrice} VND");
+        Console.WriteLine("----------------------------------");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Tổng giá trị đơn hàng sau giảm giá: {finalPrice} VND");
+        Console.ResetColor();
     }
 
 
@@ -332,10 +339,13 @@ public class Program
         AddShoppingCart("Thịt", 3);
         AddShoppingCart("Rau", 4);
         Console.WriteLine();
+        PrintCarts();
+        Console.WriteLine("----------------------------------");
         CalculateTotalPrice();
+        Console.WriteLine("----------------------------------");
         AddProductToInventory("Gạo", 15000, 10);
 
-        Console.WriteLine("\nGiảm giá");
+        Console.WriteLine("\nCác mã giảm giá: ");
         DiscountPayment("REDUCE10, REDUCE20, REDUCE40");
         Console.ReadKey();
     }
